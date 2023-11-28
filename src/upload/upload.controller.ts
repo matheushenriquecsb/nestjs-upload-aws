@@ -1,6 +1,5 @@
 import {
   Controller,
-  MaxFileSizeValidator,
   ParseFilePipe,
   Post,
   UploadedFile,
@@ -16,11 +15,7 @@ export class UploadController {
   @Post()
   @UseInterceptors(FileInterceptor('file'))
   async uploadFile(
-    @UploadedFile(
-      new ParseFilePipe({
-        validators: [new MaxFileSizeValidator({ maxSize: 1000 })],
-      }),
-    )
+    @UploadedFile(new ParseFilePipe({}))
     file: Express.Multer.File,
   ) {
     await this.uploadService.upload(file.originalname, file.buffer);

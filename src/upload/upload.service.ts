@@ -17,7 +17,7 @@ export class UploadService {
   async upload(fileName: string, file: Buffer) {
     await this.s3Client.send(
       new PutObjectCommand({
-        Bucket: 'nestjs-uploader',
+        Bucket: 'nestjs-uploader-files',
         Key: fileName,
         Body: file,
       }),
